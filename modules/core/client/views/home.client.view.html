@@ -1,8 +1,7 @@
-<section>
-  <!-- <div class="parallax"></div> -->
-
-
+<section ng-if="!vm.authentication.user">
+  <link rel="stylesheet" href="/lib/stylesheets/parallax.css">
   <div class="container text-center">
+
     <br>
     <div class="row-fluid">
       <div class="span10 offsetHalf">
@@ -12,41 +11,36 @@
     </div>
      <br><br><br>
   	<div class="row-fluid">
-        <h1 class="pull-center"><strong>Come Visit Your Friends! </strong></h1>
-        <h2 class="lead pull-center">From the comfort of your own home!</h2>
+        <h1 class="pull-center"><strong>The Yakkee Network</strong></h1><br><br><br><br><br><br>
+        <span class="align-bottom"><h2 class="lead pull-center">Developed for Seniors First!</h2></span>
   	</div>
-    <br><br><br><br>
+
     <div class="row-fluid">
 
         	<div class="span5 offsetHalf block">
             <div class="pull-center">
-              <h1>Responsive Design</h1>
-              Take a look at what we mixed up in our Bootstrap test labs.
-              Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. <br>
+              <h1>So Come Visit Your Friends!</h1>
+              <h2 class="lead pull-center">From the comfort of your own home or where ever you are</h2><br>
               <h1><i class="icon-beaker icon-4x"></i></h1>
-              <button class="btn btn-primary btn-flat">Get Started<i class="pull-right icon-chevron-right icon-large"></i></button>
+              <button class="btn btn-primary btn-flat" ng-click="vm.getStarted();">Get Started<i class="pull-right icon-chevron-right icon-large"></i></button>
             </div>
         	</div>
         	<div class="span5 block">
             <div class="pull-center">
-        	 	<h1>2013 Trends</h1>
-            	With all of the front-end frameworks at hand, why does Bootstrap lead?
-            	Aliquam mauris arcu, tristique a, condimentum feugiat justo.<br>
-            	<h1><i class="icon-fire icon-4x"></i></h1>
-            	<button class="btn btn-primary btn-flat">Go There<i class="pull-right icon-chevron-right icon-large"></i></button>
+        	 	<h1>What is Yakkee?</h1>
+            	<p class="text-xl">Yakkee is designed to bring friends and loved ones together and provide opportunity for interactivity like games and shared experiences without having to physically visit one another.</p>
+              <p class="text-xl">Some types of interactivity include games like chess, checkers and Go Fish. You can also watch movies and shows together while on video chat. So you can make inferences and wise cracks about what you are watching in real time.</p>
+
             </div>
         	</div>
 
     </div>
    	<br><br><br>
+</section>
 
+<section ng-if="vm.authentication.user">
+  <link rel="stylesheet" href="/lib/stylesheets/signedIn.css">
 
-
-
-
-
-
-
-
+  <h1 class="text-center">Hey You got this thing to work! Lookit you!</h1>
 
 </section>

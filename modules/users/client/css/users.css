@@ -3,6 +3,22 @@
     position: fixed;
   }
 }
+
+@import url('http://fonts.googleapis.com/css?family=Sigmar+One|Shrikhand|Poppins');
+
+body {
+  background: url(none);
+}
+
+label {
+  color: #4FB7F2;
+  font-family: 'Poppins', sans-serif;
+}
+
+input, .show-signup, .error-text {
+  font-family: 'Poppins', sans-serif;
+}
+
 .social-account-container {
   display: inline-block;
   position: relative;
