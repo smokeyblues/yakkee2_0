@@ -1,3 +1,5 @@
+@import url('http://fonts.googleapis.com/css?family=Sigmar+One|Shrikhand|Poppins');
+
 .content {
   margin-top: 50px;
   /*overflow-x: hidden;*/
@@ -46,4 +48,53 @@ a:hover .header-profile-image {
 footer {
   background-color: #466C79;
   text-align: center;
+  height: 100vh;
+}
+
+footer a {
+  font-family: 'Poppins', sans-serif;
+  color: #C2B7C9;
+  text-decoration: none;
+}
+
+.footer-header {
+  color: #C2B7C9;
+
+}
+
+.footer-social-icons {
+  margin-top: 50px;
+  text-align: center;
+  vertical-align: bottom;
+  line-height: 50px;
+  transition: font-size 0.25s ease-in-out;
+}
+
+.footer-social-icons:hover {
+  font-size: 5rem;
+}
+
+.footer-links {
+  margin-top: 50px;
+}
+
+footer a:hover {
+  color: snow;
+  text-decoration: none;
+  text-shadow: 0px 0px 25px #4FB7F2;
+}
+
+.font {
+  font-family: 'Sigmar One', cursive;
+}
+
+.size {
+  font-size: 5rem;
+}
+.shadow {
+  text-shadow: #466C79 5px 5px;
+}
+
+.color {
+  color: #4FB7F2;
 }

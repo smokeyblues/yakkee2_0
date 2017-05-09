@@ -11,6 +11,17 @@
   function routeConfig($stateProvider) {
     // Users state routing
     $stateProvider
+    // My own attempt at configuring a state for the user directory
+    .state('users.search', {
+      url: '/users/search',
+      templateUrl: '/modules/users/client/views/user/user-search.client.view.html',
+      controller: 'UserSearchController',
+      controllerAs: 'vm',
+      data: {
+        roles: ['user', 'admin'],
+        pageTitle: 'You Finally figured it out! Congrats!'
+      }
+    })
       .state('settings', {
         abstract: true,
         url: '/settings',

@@ -38,9 +38,17 @@
    	<br><br><br>
 </section>
 
+
+<!-- Once signed in the user gets the following -->
+
+
 <section ng-if="vm.authentication.user">
   <link rel="stylesheet" href="/lib/stylesheets/signedIn.css">
+  <div class="user-search">
 
-  <h1 class="text-center">Hey You got this thing to work! Lookit you!</h1>
+  <h1 class="text-center">It looks like you aren't connected to any of your firends yet. </h1>
+
+  <button class="btn btn-block btn-lg btn-danger text-center font color" ui-sref="users.search({})" href="/users/search">Would you like to get connected?</button>
+</div>
 
 </section>

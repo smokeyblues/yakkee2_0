@@ -22,7 +22,7 @@
       Notification.error({ message: $location.search().err });
     }
 
-    // If user is signed in then redirect back home
+    // If user is signed in then redirect to home
     if (vm.authentication.user) {
       $location.path('/');
     }

@@ -33,6 +33,21 @@
         controller: 'HomeController',
         controllerAs: 'vm'
       })
+      .state('not-down', {
+        url: '/not-found',
+        templateUrl: '/modules/core/client/views/404.client.view.html',
+        controller: 'ErrorController',
+        controllerAs: 'vm',
+        params: {
+          message: function($stateParams) {
+            return $stateParams.message;
+          }
+        },
+        data: {
+          ignoreState: true,
+          pageTitle: 'Not Found'
+        }
+      })
       .state('not-found', {
         url: '/not-found',
         templateUrl: '/modules/core/client/views/404.client.view.html',
