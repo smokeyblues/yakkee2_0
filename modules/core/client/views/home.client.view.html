@@ -46,9 +46,16 @@
   <link rel="stylesheet" href="/lib/stylesheets/signedIn.css">
   <div class="user-search">
 
-  <h1 class="text-center">It looks like you aren't connected to any of your firends yet. </h1>
+  <h1 class="text-center">Search for a Friend and start yakking!</h1>
 
-  <button class="btn btn-block btn-lg btn-danger text-center font color" ui-sref="users.search({})" href="/users/search">Would you like to get connected?</button>
+  <div class="container full-height">
+    <div class="row">
+
+      <!-- search bar starts here -->
+
+      <ng-include src="'/modules/users/client/views/user/user-search.client.view.html'"></ng-include>
+
+    </div>
 </div>
 
 </section>

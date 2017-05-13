@@ -10,6 +10,8 @@
   function HeaderController($scope, $state, Authentication, menuService) {
     var vm = this;
 
+    console.log('HeaderController has run');
+
     vm.accountMenu = menuService.getMenu('account').items[0];
     vm.authentication = Authentication;
     vm.isCollapsed = false;

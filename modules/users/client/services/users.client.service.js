@@ -10,6 +10,9 @@
 
   function UsersService($resource) {
     var Users = $resource('/api/users', {}, {
+      get: {
+        method: 'GET'
+      },
       update: {
         method: 'PUT'
       },
@@ -68,6 +71,18 @@
     });
 
     return Users;
+  }
+
+  angular
+    .module('users.services')
+    .factory('UserFactory', UserFactory);
+
+  UserFactory.$inject = ['$resource'];
+
+  function UserFactory($resource) {
+    return $resource('api/users', {
+
+    });
   }
 
   // TODO this should be Users service

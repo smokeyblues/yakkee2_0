@@ -98,3 +98,7 @@ footer a:hover {
 .color {
   color: #4FB7F2;
 }
+
+.card-pic {
+  max-height: 25vh;
+}
