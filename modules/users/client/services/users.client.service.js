@@ -80,7 +80,7 @@
   UserFactory.$inject = ['$resource'];
 
   function UserFactory($resource) {
-    return $resource('api/users', {
+    return $resource('api/users-search', {
 
     });
   }
