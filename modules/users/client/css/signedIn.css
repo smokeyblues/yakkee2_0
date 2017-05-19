@@ -1,0 +1,27 @@
+@import url('http://fonts.googleapis.com/css?family=Sigmar+One|Shrikhand|Raleway|Material+Icons');
+
+
+.user-search {
+  height: 100vh;
+  overflow: visible;
+}
+
+.search-bar {
+
+  font-family: 'Raleway', sans-serif;
+  font-size: 5rem;
+  padding: 30px !important;
+  line-height: 48px !important;
+}
+
+h1 {
+  padding-top: 5vh;
+  font-family: 'Sigmar One', cursive;
+  font-size: 5rem;
+  text-shadow: #466C79 5px 5px;
+  color: #4FB7F2;
+}
+
+.mic {
+  font-size: 48px;
+}

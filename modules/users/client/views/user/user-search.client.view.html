@@ -1,7 +1,16 @@
 <section>
 
+  <section ng-if="vm.authentication.user">
+    <link rel="stylesheet" href="/lib/stylesheets/signedIn.css">
+    <div class="user-search">
 
-  <div class="page-header">
+    <h1 class="text-center" ng-if="!vm.search">Search for a Friend and start yakking!</h1>
+
+    <div class="container">
+      <div class="row">
+
+        <!-- search bar starts here -->
+  <div class="page-header" style="border-style: none;">
     <div class="row">
       <div class="col-md-4">
       </div>
@@ -10,102 +19,25 @@
       </div>
     </div>
   </div>
-  <!-- <div class="list-group">
-    <a ng-repeat="user in vm.pagedItems" ui-sref="admin.user({userId: user._id})" class="list-group-item">
-      <h4 class="list-group-item-heading" ng-bind="user.username"></h4>
-      <p class="list-group-item-text pull-right small" ng-bind="user.roles"></p>
-      <p class="list-group-item-text" ng-bind="user.email"></p>
-    </a>
-  </div> -->
-
-  <!-- new cards -->
-
-  <div class="card" ng-repeat="user in vm.pagedItems">
-    <div class="card">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-xs-4">
-            <img class="card-img-top card-pic" ng-src="{{user.profileImageURL}}" alt="user.displayName">
-          </div>
-          <div class="col-xs-offset-4">
-            <h4 class="card-title">{{user.displayName}}</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary btn-block">Yak with {{user.firstName}}</a>
+  <div class="ng-hide" ng-show="vm.search">
+    <div class="card" ng-repeat="user in vm.pagedItems | orderBy: user.firstName">
+      <div class="card">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-4">
+              <img class="card-img-top card-pic" ng-src="{{user.profileImageURL}}" alt="user.displayName">
+            </div>
+            <div class="col-xs-offset-4">
+              <h4 class="card-title">{{user.displayName}}</h4>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a ng-href="'video-chat.client.view.html'" class="btn btn-primary btn-block">Yak with {{user.firstName}}</a> 
+            </div>
           </div>
         </div>
       </div>
-      <!-- <img class="card-img-top card-pic" ng-src="{{user.profileImageURL}}" alt="user.displayName"> -->
-      <!-- <div class="card-block"> -->
-      <!-- </div> -->
+      <!-- <hr class="ng-hide"> -->
     </div>
-    <hr>
   </div>
 
-
-
-
-  <!-- // old cards from the demo presentation -->
-
-  <!-- <div class="list-group" ng-show="hc.search" align="center">
-      <li ng-repeat="user in vm.pagedItems" class="list-group-item" align="center">
-        <div class="card indigo lighten-5  m4 offset-m4">
-          <div class="row">
-            <div class="card-image waves-effect waves-block waves-light col s12 m6">
-            <img ng-src="{{user.profileImageURL}}" alt="{{user.firstName}} {{user.displayName}}" class="activator profile-img">
-          </div>
-          <div class="card-stacked col s12 m6">
-            <div class="card-content">
-              <h4>{{user.displayName}}</h4>
-            </div>
-          </div>
-        </div>
-          <div class="card-content white">
-            <span class="card-title activator grey-text text-darken-4">Click for More<i class="material-icons right">more_vert</i></span>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title activator grey-text text-darken-4">{{user.displayName}}<i class="material-icons right">close</i></span>
-            <div class="row">
-              // <!-- /video-yak/{{hc.Auth.user._id}}_{{user._id}}
-              <a href="#">
-                <div class="col s4 card-icon" ng-click="hc.sendInvite(user, hc.Auth.user)">
-                  <h3>Video Yak</h3>
-                  <i class="fa fa-video-camera fa-4x" aria-hidden="true"></i>
-                </div>
-              </a>
-              <a href="#">
-                <div class="col s4 card-icon">
-                  <h3 class="grey-text text-lighten-1">Phone Yak</h3>
-                  <i class="grey-text text-lighten-1 fa fa-phone fa-4x" aria-hidden="true"></i>
-                  <h5 class="grey-text text-darken-1">(Coming Soon!)</h5>
-                  <h6 class="grey-text text-darken-1">Subscription Feature</h6>
-                </div>
-              </a>
-              <a href="#">
-                <div class="col s4 card-icon">
-                  <h3 class="grey-text text-lighten-1">Message Yak</h3>
-                  <i class="grey-text text-lighten-1 fa fa-mobile fa-4x" aria-hidden="true"></i>
-                  <h5 class="grey-text text-darken-1">(Coming Soon!)</h5>
-                  <h6 class="grey-text text-darken-1">Subscription Feature</h6>
-                </div>
-              </a>
-              <!-- <a href="#">
-                <div class="btn btn-flat grey-text text-lighten-1 col s4 card-icon">
-                  <h3>Phone Yak</h3>
-                  <i class="fa fa-phone fa-4x" aria-hidden="true"></i>
-                </div>
-              </a>
-              <div class="btn btn-flat grey-text text-lighten-1 col s4 card-icon">
-                <h3>Yak</h3>
-                <i class="fa fa-mobile fa-4x" aria-hidden="true"></i>
-                <h3>Messenger</h3>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </li>
-    </div> -->
-
-  <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+  <uib-pagination class="ng-hide" ng-show="vm.search" boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
 </section>

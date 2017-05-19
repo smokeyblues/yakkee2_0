@@ -2,7 +2,7 @@
 
 .content {
   margin-top: 50px;
-  /*overflow-x: hidden;*/
+  overflow-x: hidden;
 }
 .undecorated-link:hover {
   text-decoration: none;
@@ -48,7 +48,7 @@ a:hover .header-profile-image {
 footer {
   background-color: #466C79;
   text-align: center;
-  height: 100vh;
+  /*height: 100vh;*/
 }
 
 footer a {
