@@ -20,6 +20,10 @@
       $location.path('/authentication/signup');
     }
 
+    vm.videoChat = function(recipient) {
+      console.log('VideoChat button for ' + recipient + ' was pressed');
+    }
+
     UserFactory.query(function (data) {
       vm.users = data;
       vm.buildPager();

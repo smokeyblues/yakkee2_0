@@ -206,7 +206,7 @@ module.exports.initErrorRoutes = function (app) {
 };
 
 /**
- * Configure Socket.io
+ * Configure Socket.io 
  */
 module.exports.configureSocketIO = function (app, db) {
   // Load the Socket.io configuration

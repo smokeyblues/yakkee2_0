@@ -29,8 +29,8 @@
             </div>
             <div class="col-xs-offset-4">
               <h4 class="card-title">{{user.displayName}}</h4>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a ng-href="'video-chat.client.view.html'" class="btn btn-primary btn-block">Yak with {{user.firstName}}</a> 
+              <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+              <a ng-click="vm.videoChat(user.displayName)" class="btn btn-primary btn-block">Yak with {{user.firstName}}</a> 
             </div>
           </div>
         </div>

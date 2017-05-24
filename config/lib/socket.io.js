@@ -111,6 +111,8 @@ module.exports = function (app, db) {
     config.files.server.sockets.forEach(function (socketConfiguration) {
       require(path.resolve(socketConfiguration))(io, socket);
     });
+
+    
   });
 
   return server;

@@ -1,5 +1,8 @@
 @import url('http://fonts.googleapis.com/css?family=Sigmar+One|Shrikhand|Raleway|Material+Icons');
 
+body {
+  color: black;
+}
 
 .user-search {
   height: 100vh;
@@ -22,6 +25,16 @@ h1 {
   color: #4FB7F2;
 }
 
+.card-pic {
+  /*max-height: 100px;*/
+  max-width: 100px;
+  border-radius: 100px;
+}
+
 .mic {
   font-size: 48px;
+}
+
+.card {
+  margin-bottom: 5vh;
 }
