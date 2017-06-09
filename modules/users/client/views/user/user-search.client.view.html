@@ -1,6 +1,4 @@
-<section>
-
-  <section ng-if="vm.authentication.user">
+<section ng-if="vm.authentication.user">
     <link rel="stylesheet" href="/lib/stylesheets/signedIn.css">
     <div class="user-search">
 
@@ -30,7 +28,7 @@
             <div class="col-xs-offset-4">
               <h4 class="card-title">{{user.displayName}}</h4>
               <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-              <a ng-click="vm.videoChat(user.displayName)" class="btn btn-primary btn-block">Yak with {{user.firstName}}</a> 
+              <a ng-click="vm.videoChat(vm.authentication.user, user)" class="btn btn-primary btn-block">Yak with {{user.firstName}}</a>
             </div>
           </div>
         </div>

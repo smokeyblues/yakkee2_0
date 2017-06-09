@@ -108,11 +108,25 @@ module.exports = function (app, db) {
 
   // Add an event listener to the 'connection' event
   io.on('connection', function (socket) {
+    console.log('somone connected to the socket server');
+    io.emit('signedIn');
+
+    socket.on('initVideoCall', function(inviteData) {
+      // console.log(`initVideoCall button for ${inviteData.receiver.displayName} was pressed by ${inviteData.sender.displayName}`);
+      var receiverRoom = 'room' + inviteData.receiver._id;
+      // socket.join(receiverRoom);
+      // socket.broadcast.to(receiverRoom).emit('deliverInvite', inviteData);
+      socket.emit('deliverInvite', inviteData);
+    })
+
+    socket.on('signedIn', function() {
+      console.log(`Someone signed in`);
+    });
+
     config.files.server.sockets.forEach(function (socketConfiguration) {
       require(path.resolve(socketConfiguration))(io, socket);
     });
 
-    
   });
 
   return server;

@@ -5,9 +5,9 @@
     .module('users')
     .controller('AuthenticationController', AuthenticationController);
 
-  AuthenticationController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Authentication', 'PasswordValidator', 'Notification'];
+  AuthenticationController.$inject = ['$scope', '$state', 'UsersService', '$location', '$window', 'Authentication', 'PasswordValidator', 'Notification', 'Socket'];
 
-  function AuthenticationController($scope, $state, UsersService, $location, $window, Authentication, PasswordValidator, Notification) {
+  function AuthenticationController($scope, $state, UsersService, $location, $window, Authentication, PasswordValidator, Notification, Socket) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -35,6 +35,8 @@
         return false;
       }
 
+      Socket.emit('signedIn', vm.authentication.user);
+
       UsersService.userSignup(vm.credentials)
         .then(onUserSignupSuccess)
         .catch(onUserSignupError);
@@ -47,6 +49,8 @@
 
         return false;
       }
+
+      Socket.emit('signedIn', vm.authentication.user);
 
       UsersService.userSignin(vm.credentials)
         .then(onUserSigninSuccess)
@@ -71,6 +75,7 @@
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Signup successful!' });
       // And redirect to the previous or home page
       $state.go($state.previous.state.name || 'home', $state.previous.params);
+      console.log('User ' + vm.authentication.user.displayName + ' has signed in and should have triggered the socket event "signedIn"');
     }
 
     function onUserSignupError(response) {
@@ -83,6 +88,8 @@
       Notification.info({ message: 'Welcome ' + response.firstName });
       // And redirect to the previous or home page
       $state.go($state.previous.state.name || 'home', $state.previous.params);
+      console.log('User ' + vm.authentication.user.displayName + ' has signed in and should have triggered the socket event "signedIn"');
+      Socket.emit('signedIn', vm.authentication.user);
     }
 
     function onUserSigninError(response) {

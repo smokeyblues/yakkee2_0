@@ -5,10 +5,14 @@
     .module('core')
     .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', '$state', '$location', 'Authentication', '$filter', 'UserFactory'];
+    HomeController.$inject = ['$scope', '$state', '$location', 'Authentication', '$filter', 'UserFactory', 'Socket'];
 
-  function HomeController($scope, $state, $location, Authentication,$filter, UserFactory) {
+  function HomeController($scope, $state, $location, Authentication, $filter, UserFactory, Socket) {
     var vm = this;
+
+    // inviteReceived and loader should eventually be moved to their own file with the other socket call system code
+    vm.inviteReceived = false;
+    vm.loader = false;
     vm.authentication = Authentication;
     vm.buildPager = buildPager;
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
@@ -20,17 +24,43 @@
       $location.path('/authentication/signup');
     }
 
-    vm.videoChat = function(recipient) {
-      console.log('VideoChat button for ' + recipient + ' was pressed');
+    // videoChat is the function that triggers the socket call system
+
+
+
+    // step 2. listen for 'initVideoCall' in config/lib/socket.io.js under the 'connection' listener.
+      // 2a. put together a data object that will be able to assemble the socket room that only the receiving user is listening to.
+      // 2b. emit an event called 'deliverInvite' into that room that will trigger the invite card to be viewable within the receiving user's view at the level of index.html and pass data about the sender and the receiver
+
+    // step 3. listen for the event in the home controller and offer the option to accept or reject the request for videoChat
+
+    vm.videoChat = function(sender, receiver) {
+      console.log('VideoChat button for ' + receiver.displayName + ' was pressed by ' + sender.displayName);
+      vm.loader = true;
+      var inviteUrl = 'https://meet.jit.si/' + receiver._id + '_' + sender._id;
+      // console.log(to);
+       var inviteData = {
+        sender: sender,
+        receiver: receiver,
+        link: inviteUrl
+      }
+
+      // step 1. emit 'initVideoCall' on the front end and send data objects for both sender and receivers
+      Socket.emit('initVideoCall', inviteData);
     }
+
+    // step 3. listen for the event in the home controller and offer the option to accept or reject the request for videoChat
+    Socket.on('deliverInvite', function(inviteData) {
+      vm.inviteReceived = true;
+      vm.invitation = inviteData;
+      console.log('deliverInvite has been received on the front end');
+    })
 
     UserFactory.query(function (data) {
       vm.users = data;
       vm.buildPager();
       console.log(vm.users);
     });
-
-
 
     function buildPager() {
       vm.pagedItems = [];
