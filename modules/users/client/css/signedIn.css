@@ -27,7 +27,7 @@ h1 {
 
 .card-pic {
   /*max-height: 100px;*/
-  max-width: 100px;
+  max-width: 20rem;
   border-radius: 100px;
 }
 
@@ -37,4 +37,35 @@ h1 {
 
 .card {
   margin-bottom: 5vh;
+}
+
+.invitation {
+	position: fixed;
+	background-color: #E3DEE6;
+	width: 50rem;
+	bottom: 1rem;
+	right: 7rem;
+	text-align: center;
+	border: none;
+	/*padding: 2rem 0px 2rem;*/
+	border-radius: 2rem;
+	box-shadow: #4FB7F2 0.01rem 0.01rem 5rem;
+}
+
+.card-title {
+	padding-bottom: 1.5rem;
+}
+
+.invite-pic {
+	max-height: 30rem;
+	max-width: 20rem;
+	padding-top: 0;
+	border-radius: 2rem 0 0 2rem;
+}
+
+.card-block {
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
+	max-width: 29rem;
 }

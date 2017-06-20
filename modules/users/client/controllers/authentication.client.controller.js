@@ -16,12 +16,10 @@
     vm.signin = signin;
     vm.callOauthProvider = callOauthProvider;
     vm.usernameRegex = /^(?=[\w.-]+$)(?!.*[._-]{2})(?!\.)(?!.*\.$).{3,34}$/;
-
     // Get an eventual error defined in the URL query string:
     if ($location.search().err) {
       Notification.error({ message: $location.search().err });
     }
-
     // If user is signed in then redirect to home
     if (vm.authentication.user) {
       $location.path('/');
@@ -35,8 +33,6 @@
         return false;
       }
 
-      Socket.emit('signedIn', vm.authentication.user);
-
       UsersService.userSignup(vm.credentials)
         .then(onUserSignupSuccess)
         .catch(onUserSignupError);
@@ -49,8 +45,6 @@
 
         return false;
       }
-
-      Socket.emit('signedIn', vm.authentication.user);
 
       UsersService.userSignin(vm.credentials)
         .then(onUserSigninSuccess)
@@ -75,7 +69,6 @@
       Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Signup successful!' });
       // And redirect to the previous or home page
       $state.go($state.previous.state.name || 'home', $state.previous.params);
-      console.log('User ' + vm.authentication.user.displayName + ' has signed in and should have triggered the socket event "signedIn"');
     }
 
     function onUserSignupError(response) {
@@ -86,10 +79,10 @@
       // If successful we assign the response to the global user model
       vm.authentication.user = response;
       Notification.info({ message: 'Welcome ' + response.firstName });
+      console.log('user ' + response.displayName + ' signed in');
+      Socket.emit('signedIn', response);
       // And redirect to the previous or home page
       $state.go($state.previous.state.name || 'home', $state.previous.params);
-      console.log('User ' + vm.authentication.user.displayName + ' has signed in and should have triggered the socket event "signedIn"');
-      Socket.emit('signedIn', vm.authentication.user);
     }
 
     function onUserSigninError(response) {

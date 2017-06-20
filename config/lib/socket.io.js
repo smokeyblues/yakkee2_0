@@ -1,3 +1,4 @@
+/* eslint-disable no-trailing-spaces */
 'use strict';
 
 // Load the module dependencies
@@ -108,19 +109,22 @@ module.exports = function (app, db) {
 
   // Add an event listener to the 'connection' event
   io.on('connection', function (socket) {
-    console.log('somone connected to the socket server');
-    io.emit('signedIn');
+
+    // when user signs in, assign a socket room based on unique username
+    socket.on('signedIn', function(user) {
+      console.log('signedIn event triggered', user);
+      var roomName = 'room' + user.username;
+      socket.join(roomName);
+      console.log('All Rooms: ');
+      console.log(io.nsps['/'].adapter.rooms);
+    });
 
     socket.on('initVideoCall', function(inviteData) {
       // console.log(`initVideoCall button for ${inviteData.receiver.displayName} was pressed by ${inviteData.sender.displayName}`);
-      var receiverRoom = 'room' + inviteData.receiver._id;
-      // socket.join(receiverRoom);
-      // socket.broadcast.to(receiverRoom).emit('deliverInvite', inviteData);
-      socket.emit('deliverInvite', inviteData);
-    })
-
-    socket.on('signedIn', function() {
-      console.log(`Someone signed in`);
+      var receiverRoom = 'room' + inviteData.receiver.username;
+      console.log(receiverRoom);
+      socket.join(receiverRoom);
+      socket.broadcast.to(receiverRoom).emit('deliverInvite', inviteData);
     });
 
     config.files.server.sockets.forEach(function (socketConfiguration) {

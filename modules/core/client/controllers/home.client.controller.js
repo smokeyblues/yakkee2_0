@@ -19,6 +19,9 @@
     vm.pageChanged = pageChanged;
 
     console.log('HomeController was triggered');
+    if (vm.authentication.user) {
+      Socket.emit('signedIn', vm.authentication.user);
+    }
 
     vm.getStarted = function() {
       $location.path('/authentication/signup');
@@ -37,29 +40,42 @@
     vm.videoChat = function(sender, receiver) {
       console.log('VideoChat button for ' + receiver.displayName + ' was pressed by ' + sender.displayName);
       vm.loader = true;
-      var inviteUrl = 'https://meet.jit.si/' + receiver._id + '_' + sender._id;
-      // console.log(to);
+      var inviteUrl = 'https://meet.jit.si/' + receiver.firstName + receiver.lastName + 'yakkinWith' + sender.firstName + sender.LastName;
        var inviteData = {
         sender: sender,
         receiver: receiver,
         link: inviteUrl
       }
 
-      // step 1. emit 'initVideoCall' on the front end and send data objects for both sender and receivers
+      // --> step 1. emit 'initVideoCall' on the front end and send data objects for both sender and receivers
       Socket.emit('initVideoCall', inviteData);
     }
 
     // step 3. listen for the event in the home controller and offer the option to accept or reject the request for videoChat
     Socket.on('deliverInvite', function(inviteData) {
-      vm.inviteReceived = true;
-      vm.invitation = inviteData;
-      console.log('deliverInvite has been received on the front end');
-    })
+      $scope.$apply(function() {
+        vm.inviteReceived = true;
+        vm.invitation = inviteData;
+        console.log('deliverInvite has been received on the front end');
+      });
+    });
+
+    // Run this function if the receiving party agrees to accept the video call
+    vm.inviteAccepted =function() {
+
+    }
+
+    // Run this function if the receiving party declines the video call
+    vm.inviteDeclined = function() {
+
+    }
+
 
     UserFactory.query(function (data) {
       vm.users = data;
       vm.buildPager();
-      console.log(vm.users);
+      // console.log(Socket);
+      // console.log(vm.users);
     });
 
     function buildPager() {

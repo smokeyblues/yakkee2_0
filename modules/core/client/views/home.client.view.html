@@ -1,14 +1,15 @@
+<
 <section ng-if="!vm.authentication.user">
 
   <ng-include src="'/modules/users/client/views/user/splash.client.view.html'"></ng-include>
 </section>
-
-
 <!-- Once signed in the user gets the following -->
 
-      <ng-include src="'/modules/users/client/views/user/user-search.client.view.html'"></ng-include>
+<section ng-if="vm.authentication.user">
 
-    </div>
-</div>
+  <ng-include src="'/modules/users/client/views/user/user-search.client.view.html'"></ng-include>
 
-</section> 
+  <ng-include ng-if="vm.inviteReceived" src="'/modules/users/client/views/user/invite.view.html'"></ng-include>
+
+
+</section>
