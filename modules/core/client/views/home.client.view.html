@@ -7,9 +7,13 @@
 
 <section ng-if="vm.authentication.user">
 
-  <ng-include src="'/modules/users/client/views/user/user-search.client.view.html'"></ng-include>
+  <ng-include ng-if="!vm.loader" src="'/modules/users/client/views/user/user-search.client.view.html'"></ng-include>
+
+  <ng-include ng-if="vm.loader" src="'/modules/users/client/views/user/loader.view.html'"></ng-include>
 
   <ng-include ng-if="vm.inviteReceived" src="'/modules/users/client/views/user/invite.view.html'"></ng-include>
+
+  <ng-include ng-if="vm.rsvpDeclined" src="'/modules/users/client/views/user/rsvpDeclined.view.html'"></ng-include>
 
 
 </section>

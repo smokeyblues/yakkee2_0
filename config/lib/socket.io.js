@@ -127,6 +127,16 @@ module.exports = function (app, db) {
       socket.broadcast.to(receiverRoom).emit('deliverInvite', inviteData);
     });
 
+    socket.on('inviteAccepted', function(rsvp) {
+      var returnRoute = 'room' + rsvp.sender.username;
+      socket.broadcast.to(returnRoute).emit('returnRsvp', rsvp);
+    });
+
+    socket.on('inviteDeclined', function(rsvp) {
+      var returnRoute = 'room' + rsvp.sender.username;
+      socket.broadcast.to(returnRoute).emit('rsvpToDecline', rsvp);
+    })
+
     config.files.server.sockets.forEach(function (socketConfiguration) {
       require(path.resolve(socketConfiguration))(io, socket);
     });

@@ -12,6 +12,7 @@
 
     // inviteReceived and loader should eventually be moved to their own file with the other socket call system code
     vm.inviteReceived = false;
+    vm.rsvpDeclined = false;
     vm.loader = false;
     vm.authentication = Authentication;
     vm.buildPager = buildPager;
@@ -45,11 +46,11 @@
         sender: sender,
         receiver: receiver,
         link: inviteUrl
-      }
+      };
 
       // --> step 1. emit 'initVideoCall' on the front end and send data objects for both sender and receivers
       Socket.emit('initVideoCall', inviteData);
-    }
+    };
 
     // step 3. listen for the event in the home controller and offer the option to accept or reject the request for videoChat
     Socket.on('deliverInvite', function(inviteData) {
@@ -61,14 +62,33 @@
     });
 
     // Run this function if the receiving party agrees to accept the video call
-    vm.inviteAccepted =function() {
+    vm.inviteAccepted = function(rsvp) {
+      vm.inviteReceived = false;
+      Socket.emit('inviteAccepted', rsvp);
+    };
 
-    }
+    Socket.on('returnRsvp', function(rsvp) {
+      $scope.$apply(function() {
+        vm.loader = false;
+        // the state change occurs here
+      });
+    });
 
     // Run this function if the receiving party declines the video call
-    vm.inviteDeclined = function() {
+    vm.inviteDeclined = function(rsvp) {
+      Socket.emit('inviteDeclined', rsvp);
+    };
 
-    }
+    Socket.on('rsvpToDecline', function(rsvp) {
+      $scope.$apply(function () {
+        vm.rsvp = rsvp;
+        vm.rsvpDeclined = true;
+      });
+    });
+
+    vm.responseAcknowledged = function () {
+      vm.rsvpDeclined = false;
+    };
 
 
     UserFactory.query(function (data) {
