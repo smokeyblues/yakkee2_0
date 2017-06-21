@@ -19,7 +19,6 @@
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
     vm.pageChanged = pageChanged;
 
-    console.log('HomeController was triggered');
     if (vm.authentication.user) {
       Socket.emit('signedIn', vm.authentication.user);
     }
@@ -39,7 +38,6 @@
     // step 3. listen for the event in the home controller and offer the option to accept or reject the request for videoChat
 
     vm.videoChat = function(sender, receiver) {
-      console.log('VideoChat button for ' + receiver.displayName + ' was pressed by ' + sender.displayName);
       vm.loader = true;
       var inviteUrl = 'https://meet.jit.si/' + receiver.firstName + receiver.lastName + 'yakkinWith' + sender.firstName + sender.LastName;
        var inviteData = {
