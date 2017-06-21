@@ -135,7 +135,12 @@ module.exports = function (app, db) {
     socket.on('inviteDeclined', function(rsvp) {
       var returnRoute = 'room' + rsvp.sender.username;
       socket.broadcast.to(returnRoute).emit('rsvpToDecline', rsvp);
-    })
+    });
+
+    socket.on('cancelCall', function (invitation) {
+      var roomName = 'room' + invitation.receiver.username;
+      socket.broadcast.to(roomName).emit('cancelCall');
+    });
 
     config.files.server.sockets.forEach(function (socketConfiguration) {
       require(path.resolve(socketConfiguration))(io, socket);

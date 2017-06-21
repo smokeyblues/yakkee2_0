@@ -48,6 +48,8 @@
         link: inviteUrl
       };
 
+       vm.invitation = inviteData;
+
       // --> step 1. emit 'initVideoCall' on the front end and send data objects for both sender and receivers
       Socket.emit('initVideoCall', inviteData);
     };
@@ -76,18 +78,33 @@
 
     // Run this function if the receiving party declines the video call
     vm.inviteDeclined = function(rsvp) {
+      vm.inviteReceived = false;
       Socket.emit('inviteDeclined', rsvp);
     };
 
     Socket.on('rsvpToDecline', function(rsvp) {
       $scope.$apply(function () {
         vm.rsvp = rsvp;
+        vm.search = '';
+        vm.loader = false;
         vm.rsvpDeclined = true;
       });
     });
 
+    vm.cancelCall = function(invitation) {
+      var room = 'room' + vm.invitation.receiver.username;
+      vm.loader = false;
+      vm.search = '';
+      Socket.emit('cancelCall', invitation);
+    };
+
+    Socket.on('cancelCall', function () {
+      vm.inviteReceived = false;
+    });
+
     vm.responseAcknowledged = function () {
       vm.rsvpDeclined = false;
+      vm.loader = false;
     };
 
 

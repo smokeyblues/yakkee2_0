@@ -7,7 +7,7 @@
 
 <section ng-if="vm.authentication.user">
 
-  <ng-include ng-if="!vm.loader" src="'/modules/users/client/views/user/user-search.client.view.html'"></ng-include>
+  <ng-include ng-if="!vm.loader && !vm.rsvpDeclined" src="'/modules/users/client/views/user/user-search.client.view.html'"></ng-include>
 
   <ng-include ng-if="vm.loader" src="'/modules/users/client/views/user/loader.view.html'"></ng-include>
 
