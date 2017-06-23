@@ -142,6 +142,12 @@ module.exports = function (app, db) {
       socket.broadcast.to(roomName).emit('cancelCall');
     });
 
+    socket.on('hangUp', function (invitation) {
+      console.log(invitation);
+      socket.broadcast.to(invitation.senderRoom).emit('endCall');
+      socket.broadcast.to(invitation.receiverRoom).emit('endCall');
+    });
+
     config.files.server.sockets.forEach(function (socketConfiguration) {
       require(path.resolve(socketConfiguration))(io, socket);
     });
