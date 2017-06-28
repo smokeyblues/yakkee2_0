@@ -60,11 +60,15 @@ footer a {
 
 .footer-header {
   color: #C2B7C9;
+	padding-bottom: 5rem;
+}
 
+.social-icons {
+	padding-bottom: 3rem;
 }
 
 .footer-social-icons {
-  margin-top: 50px;
+  /*margin-top: 50px;*/
   text-align: center;
   vertical-align: bottom;
   line-height: 50px;
@@ -77,6 +81,7 @@ footer a {
 
 .footer-links {
   margin-top: 50px;
+	padding-bottom: 5rem;
 }
 
 footer a:hover {
@@ -100,6 +105,30 @@ footer a:hover {
   color: #4FB7F2;
 }
 
+.snow {
+	color: snow;
+}
+
 .card-pic {
   max-height: 25vh;
+}
+
+.space {
+	padding-bottom: 4rem;
+}
+
+.section-header {
+	color: snow;
+	text-align: left;
+	padding-left: 5rem;
+	padding-bottom: 5rem;
+}
+
+#newsletterEmail {
+	margin-left: 5rem;
+	width: 90vw;
+}
+
+#submit-button {
+	margin-right: 5vw;
 }

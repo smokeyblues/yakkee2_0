@@ -10,8 +10,8 @@ var passport = require('passport'),
 module.exports = function (config) {
   // Use facebook strategy
   passport.use(new FacebookStrategy({
-    clientID: config.facebook.clientID,
-    clientSecret: config.facebook.clientSecret,
+    clientID: config.facebook.clientID || '159067874512267',
+    clientSecret: config.facebook.clientSecret || '5287868c18c2ac17f825c09d112fcefa',
     callbackURL: config.facebook.callbackURL,
     profileFields: ['id', 'name', 'displayName', 'emails', 'photos'],
     passReqToCallback: true
