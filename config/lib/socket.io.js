@@ -112,7 +112,6 @@ module.exports = function (app, db) {
 
     // when user signs in, assign a socket room based on unique username
     socket.on('signedIn', function(user) {
-      console.log('signedIn event triggered', user);
       var roomName = 'room' + user.username;
       socket.join(roomName);
       console.log('All Rooms: ');
